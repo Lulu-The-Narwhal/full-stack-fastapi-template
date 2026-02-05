@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": ".cursor/hooks/audit-log.sh"
+      }
+    ],
+    "sessionEnd": [
+      {
+        "command": ".cursor/hooks/audit-log.sh"
+      }
+    ],
+    "beforeSubmitPrompt": [
+      {
+        "command": ".cursor/hooks/enrich-prompt.sh",
+        "timeout": 5
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": ".cursor/hooks/audit-log.sh"
+      }
+    ],
+    "postToolUse": [
+      {
+        "command": ".cursor/hooks/audit-log.sh"
+      }
+    ],
+    "afterFileEdit": [
+      {
+        "command": ".cursor/hooks/after-file-edit.sh",
+        "timeout": 10
+      },
+      {
+        "command": ".cursor/hooks/audit-log.sh"
+      }
+    ],
+    "afterShellExecution": [
+      {
+        "command": ".cursor/hooks/audit-log.sh"
+      }
+    ],
+    "afterMCPExecution": [
+      {
+        "command": ".cursor/hooks/audit-log.sh"
+      }
+    ]
+  }
+}

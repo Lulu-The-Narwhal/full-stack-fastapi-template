@@ -1,0 +1,54 @@
+---
+description: "Test patterns for pytest - structure and naming conventions"
+globs:
+  - "**/*.py"
+alwaysApply: false
+---
+
+# 🧪 Test Patterns (pytest)
+
+## Test Structure
+
+**Framework**: pytest
+**Location**: `tests/`
+
+**Example test files from your codebase**:
+- `frontend/tests/items.spec.ts`
+- `frontend/tests/reset-password.spec.ts`
+- `frontend/tests/sign-up.spec.ts`
+- `frontend/tests/auth.setup.ts`
+- `frontend/tests/login.spec.ts`
+
+## Real Test Example
+
+**Function**: `test_email`  
+**File**: `backend/app/api/routes/utils.py`
+
+```python
+def test_email(email_to: EmailStr) -> Message:
+"""
+    Test emails.
+    """
+    # See `backend/app/api/routes/utils.py` for full test implementation
+```
+
+
+
+## Test Naming
+
+- Test functions: `test_*` (e.g., `test_validate_email`)
+- Test classes: `Test*` (e.g., `TestUserService`)
+- Test files: `test_*.py` or `*_test.py`
+
+## Example Pattern
+
+```python
+# tests/test_validation.py
+def test_function_name():
+    """Test description."""
+    assert function_call() == expected_result
+```
+
+---
+
+**Follow the test structure in `frontend/tests/items.spec.ts` when writing new tests.**

@@ -1,0 +1,75 @@
+---
+description: "Naming conventions detected from codebase - camelCase functions, PascalCase classes, camelCase constants"
+globs:
+  - "**/*.py"
+alwaysApply: false
+---
+
+# 📝 Naming Conventions
+
+**Detected from 872 code patterns**
+
+## Functions: `camelCase`
+
+**Private Prefix**: `_` (e.g., `_function_name`)
+
+**Examples from your codebase**:
+- `fillForm` (see `frontend/tests/sign-up.spec.ts`)
+- `verifyInput` (see `frontend/tests/sign-up.spec.ts`)
+- `fillForm` (see `frontend/tests/login.spec.ts`)
+- `verifyInput` (see `frontend/tests/login.spec.ts`)
+- `findEmail` (see `frontend/tests/utils/mailcatcher.ts`)
+
+**Real Example**:
+
+```python
+) => {
+  await page.getByTestId("full-name-input").fill(full_name)
+  await page.getByTestId("email-input").fill(email)
+  await page.getByTestId("password-input").fill(password)
+  await page.getByTestId("confirm-password-input").fill(confirm_password)
+}
+```
+
+**Usage Count**: 0  
+See `frontend/tests/sign-up.spec.ts` for full implementation.
+
+## Classes: `PascalCase`
+
+**Examples from your codebase**:
+- `CancelError` (see `frontend/src/client/core/CancelablePromise.ts`)
+- `CancelablePromise` (see `frontend/src/client/core/CancelablePromise.ts`)
+- `ApiError` (see `frontend/src/client/core/ApiError.ts`)
+- `Interceptors` (see `frontend/src/client/core/OpenAPI.ts`)
+- `ItemsService` (see `frontend/src/client/sdk.gen.ts`)
+
+**Real Example**:
+
+```python
+class CancelError extends Error {
+	constructor(message: string) {
+		super(message);
+		this.name = 'CancelError';
+	}
+
+	public get isCancelled(): boolean {
+		return true;
+	}
+}
+```
+
+**Usage Count**: 0  
+See `frontend/src/client/core/CancelablePromise.ts` for full implementation.
+
+## Constants: `camelCase`
+
+**Examples from your codebase**:
+- `password` (see `frontend/tests/items.spec.ts`)
+- `title` (see `frontend/tests/items.spec.ts`)
+- `description` (see `frontend/tests/items.spec.ts`)
+- `title` (see `frontend/tests/items.spec.ts`)
+- `itemRow` (see `frontend/tests/items.spec.ts`)
+
+---
+
+**Follow these patterns when creating new code.**

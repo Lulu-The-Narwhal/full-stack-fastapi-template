@@ -1,0 +1,37 @@
+---
+description: "Dependency patterns - common external packages and internal modules"
+globs:
+  - "**/*.py"
+alwaysApply: false
+---
+
+# 📦 Dependency Patterns
+
+## External Dependencies
+
+**Most commonly used packages**:
+
+1. **`members`** (1 usages)
+
+## Dependency Management
+
+**Files**: `pyproject.toml` or `requirements.txt`
+
+**Pattern**: Use virtual environments, pin versions in production
+
+```toml
+# pyproject.toml
+[tool.poetry.dependencies]
+fastapi = "^0.104.0"
+pydantic = "^2.0.0"
+```
+
+```txt
+# requirements.txt
+fastapi>=0.104.0
+pydantic>=2.0.0
+```
+
+---
+
+**When adding new dependencies, check if similar packages are already in use.**

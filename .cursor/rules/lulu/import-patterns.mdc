@@ -1,0 +1,34 @@
+---
+description: "Import patterns - absolute imports, common imports from codebase"
+globs:
+  - "**/*.py"
+alwaysApply: false
+---
+
+# 📦 Import Patterns
+
+**Import Style**: Absolute imports
+
+## Most Common Imports
+
+No import patterns detected.
+
+## Import Guidelines
+
+- **Use absolute imports**: `from poc.server.api.models import ...`
+- **Group imports**: Standard library → Third-party → Local
+- **Example**:
+  ```python
+  import json
+  import logging
+  from typing import Optional
+  
+  from fastapi import APIRouter
+  from saq import Queue
+  
+  from poc.server.api.models import UploadResponse
+  ```
+
+---
+
+**Follow these import patterns when adding new code.**

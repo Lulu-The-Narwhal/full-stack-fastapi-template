@@ -1,0 +1,11 @@
+{
+  "api_url": "http://localhost:8000",
+  "account_id": "ab07aca4-4bfb-495d-924d-f5135e7be0f9",
+  "codebase_id": "84283a44-3e1e-4dff-82a4-dad7212ec972",
+  "last_upload": "2026-02-05T15:30:48.460Z",
+  "coverage": {
+    "objects": 872,
+    "embedded": 0,
+    "percentage": 0
+  }
+}

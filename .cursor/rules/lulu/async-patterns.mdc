@@ -1,0 +1,58 @@
+---
+description: "Async patterns - async/await patterns detected in codebase"
+globs:
+  - "**/*.py"
+alwaysApply: false
+---
+
+# ⚡ Async Patterns
+
+**Detected**: 47 async functions/patterns
+
+## Real Example from Your Codebase
+
+**Function**: `resolve`  
+**File**: `frontend/src/client/core/request.ts`  
+**Usage Count**: 5
+
+```python
+const resolve = async <T>(options: ApiRequestOptions<T>, resolver?: T | Resolver<T>): Promise<T | undefined> => {
+	if (typeof resolver === 'function') {
+		return (resolver as Resolver<T>)(options);
+	}
+	return resolver;
+};
+```
+
+See `frontend/src/client/core/request.ts` for full implementation.
+
+## Async Pattern Style
+
+**Pattern**: `async def` with `await`
+
+```python
+async def fetch_data(url: str) -> dict:
+    """Fetch data asynchronously."""
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            return await response.json()
+```
+
+**Best Practices**:
+- Use `async def` for async functions
+- Use `await` for async operations
+- Use `async with` for async context managers
+- Use `asyncio.gather()` for concurrent operations
+
+## Common Patterns
+
+**Top 5 async functions**:
+1. `resolve` (5 usages) - `frontend/src/client/core/request.ts`
+2. `findEmail` (1 usages) - `frontend/tests/utils/mailcatcher.ts`
+3. `checkEmails` (1 usages) - `frontend/tests/utils/mailcatcher.ts`
+4. `createUser` (1 usages) - `frontend/tests/utils/privateApi.ts`
+5. `getHeaders` (1 usages) - `frontend/src/client/core/request.ts`
+
+---
+
+**Follow these async patterns when writing asynchronous code.**

@@ -1,0 +1,19 @@
+{
+  "totalContextReuses": 0,
+  "totalContextLoads": 0,
+  "totalSearchReuses": 0,
+  "totalSearchLoads": 0,
+  "totalGuidanceReuses": 0,
+  "totalGuidanceLoads": 0,
+  "totalTokensSaved": 0,
+  "lastUpdated": "2026-02-05T15:30:48.164Z",
+  "currentSession": {
+    "contextReuses": 0,
+    "contextLoads": 0,
+    "searchReuses": 0,
+    "searchLoads": 0,
+    "guidanceReuses": 0,
+    "guidanceLoads": 0,
+    "tokensSaved": 0
+  }
+}
