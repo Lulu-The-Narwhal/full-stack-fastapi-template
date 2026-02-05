@@ -1,10 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import axios from "axios"
 
-import { UsersService, type UserUpdateMe } from "@/client"
+import { OpenAPI, UsersService, type UserUpdateMe } from "@/client"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -19,7 +21,7 @@ import { LoadingButton } from "@/components/ui/loading-button"
 import useAuth from "@/hooks/useAuth"
 import useCustomToast from "@/hooks/useCustomToast"
 import { cn } from "@/lib/utils"
-import { handleError } from "@/utils"
+import { getInitials, handleError } from "@/utils"
 
 const formSchema = z.object({
   full_name: z.string().max(30).optional(),
@@ -33,6 +35,7 @@ const UserInformation = () => {
   const { showSuccessToast, showErrorToast } = useCustomToast()
   const [editMode, setEditMode] = useState(false)
   const { user: currentUser } = useAuth()
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -80,9 +83,57 @@ const UserInformation = () => {
     toggleEditMode()
   }
 
+  const handleAvatarChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    const formData = new FormData()
+    formData.append("file", file)
+
+    try {
+      const token = localStorage.getItem("access_token")
+      await axios.post(OpenAPI.BASE + "/api/v1/users/me/avatar", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      showSuccessToast("Avatar updated successfully")
+      queryClient.invalidateQueries({ queryKey: ["currentUser"] })
+    } catch (err: any) {
+      handleError.call(showErrorToast, err)
+    }
+  }
+
+  const avatarUrl = (currentUser as any)?.avatar_url
+    ? `${(currentUser as any)?.avatar_url.startsWith("http") ? "" : OpenAPI.BASE}${(currentUser as any)?.avatar_url}`
+    : undefined
+
   return (
     <div className="max-w-md">
       <h3 className="text-lg font-semibold py-4">User Information</h3>
+      
+      <div className="flex items-center gap-4 mb-6">
+        <Avatar className="h-24 w-24 cursor-pointer" onClick={() => fileInputRef.current?.click()}>
+          <AvatarImage src={avatarUrl} className="object-cover" />
+          <AvatarFallback className="text-2xl">
+            {getInitials(currentUser?.full_name || currentUser?.email || "U")}
+          </AvatarFallback>
+        </Avatar>
+        <div className="flex flex-col gap-2">
+          <Button variant="outline" size="sm" onClick={() => fileInputRef.current?.click()}>
+            Change Avatar
+          </Button>
+          <input
+            type="file"
+            ref={fileInputRef}
+            hidden
+            onChange={handleAvatarChange}
+            accept="image/*"
+          />
+        </div>
+      </div>
+
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

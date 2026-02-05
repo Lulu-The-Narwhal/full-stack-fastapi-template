@@ -1,9 +1,47 @@
 {
-  "totalOperations": 0,
-  "totalCost": 0,
-  "totalTokens": 0,
-  "byOperation": {},
-  "byTool": {},
-  "byModel": {},
-  "lastUpdated": "2026-02-05T15:30:48.164Z"
+  "totalOperations": 5,
+  "totalCost": 0.29519999999999996,
+  "totalTokens": 6600,
+  "byOperation": {
+    "lulu_get_context": {
+      "count": 1,
+      "cost": 0.1098,
+      "tokens": 2100
+    },
+    "lulu_search": {
+      "count": 3,
+      "cost": 0.1404,
+      "tokens": 3000
+    },
+    "lulu_assess": {
+      "count": 1,
+      "cost": 0.045,
+      "tokens": 1500
+    }
+  },
+  "byTool": {
+    "lulu_get_context": {
+      "count": 1,
+      "cost": 0.1098,
+      "tokens": 2100
+    },
+    "lulu_search": {
+      "count": 3,
+      "cost": 0.1404,
+      "tokens": 3000
+    },
+    "lulu_assess": {
+      "count": 1,
+      "cost": 0.045,
+      "tokens": 1500
+    }
+  },
+  "byModel": {
+    "Claude Sonnet 4": {
+      "count": 5,
+      "cost": 0.29519999999999996,
+      "tokens": 6600
+    }
+  },
+  "lastUpdated": "2026-02-05T15:41:50.051Z"
 }
