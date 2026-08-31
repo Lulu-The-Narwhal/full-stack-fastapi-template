@@ -1,0 +1,378 @@
+---
+description: "When to search existing code vs create new code - prevents duplication"
+alwaysApply: true
+---
+
+# 🔍 Lulu Search Patterns
+
+**ALWAYS search before creating to avoid duplication.**
+
+## ⛔ **BLOCKING RULE: NO CREATION WITHOUT SEARCH**
+
+**BEFORE creating ANY code, you MUST:**
+
+1. ✅ **Call `lulu_search`** with a specific query (MANDATORY!)
+2. ✅ **Review ALL results** (top 5-8 minimum) (MANDATORY!)
+3. ✅ **Check similarity scores** for every result (MANDATORY!)
+4. ✅ **REUSE if similarity ≥85%** (NO EXCEPTIONS!)
+
+**If you create code without searching first, you are violating the workflow!**
+
+## When to Use lulu_search
+
+### ✅ DO Search For:
+
+1. **Before Creating Any Function**
+   ```
+   User: "Create email validation"
+   You: lulu_search(query: "email validation")
+   ```
+   
+   Why? Function might already exist with different name.
+
+2. **Before Creating Components/Modules**
+   ```
+   User: "Create login handler"
+   You: lulu_search(query: "login authentication handler")
+   ```
+   
+   Why? Similar module might exist to extend or reuse.
+
+3. **When User Asks "Do we have...?"**
+   ```
+   User: "Do we have authentication?"
+   You: lulu_search(query: "authentication session")
+   ```
+   
+   Why? Direct question about existence.
+
+4. **For Any Feature Implementation**
+   ```
+   User: "Add payment processing"
+   You: lulu_search(query: "payment processing integration")
+   ```
+   
+   Why? Complex features often have partial implementations.
+
+5. **Before Creating Types/Interfaces/Models**
+   ```
+   User: "Create User model"
+   You: lulu_search(query: "user model schema")
+   ```
+   
+   Why? Types/models are commonly reused across codebase.
+
+6. **Before Creating Constants/Config**
+   ```
+   User: "Add API endpoints"
+   You: lulu_search(query: "api endpoints constants config")
+   ```
+   
+   Why? Constants file likely exists to extend.
+
+---
+
+## Search Query Best Practices
+
+### ✅ Good Queries (Specific & Descriptive)
+- `"email validation regex"`
+- `"user authentication session token"`
+- `"payment webhook handler"`
+- `"date formatting utilities"`
+- `"api error handling middleware"`
+- `"database connection pool"`
+- `"logging configuration"`
+
+### ❌ Bad Queries (Too Vague)
+- `"validation"` → Too broad
+- `"auth"` → Too generic
+- `"handler"` → Not specific
+- `"utils"` → Everything is utils
+- `"function"` → Meaningless
+
+### 💡 Query Construction Tips
+1. **Include domain terms**: "email", "payment", "user", "database"
+2. **Include technical terms**: "validation", "authentication", "formatting"
+3. **Include context**: "login handler", "checkout flow", "error middleware"
+4. **Use 3-6 words**: Balance specificity and breadth
+5. **Be language-agnostic**: Use concepts not syntax
+
+---
+
+## Interpreting Search Results
+
+### High Similarity (≥90%)
+**Almost Exact Match → REUSE IMMEDIATELY**
+
+```
+lulu_search(query: "email validation")
+Results:
+  1. validateEmail (0.94 similarity)
+     File: utils/validation.{ts|py|go}
+     Code: function/def/func validateEmail(email) => ...
+
+Decision: Perfect match! Import and use
+```
+
+### Strong Similarity (85-89%)
+**Very Similar → REUSE OR ADAPT**
+
+```
+lulu_search(query: "phone validation")
+Results:
+  1. validateEmail (0.87 similarity)
+     Similar pattern, different field
+
+Decision: Adapt pattern or extend existing validator
+```
+
+### Medium Similarity (70-84%)
+**Related Code → USE AS REFERENCE**
+
+```
+lulu_search(query: "payment validation")
+Results:
+  1. validateEmail (0.78 similarity)
+     Validation pattern exists
+  2. VALIDATION_PATTERNS (0.75 similarity)
+     Constants exist
+
+Decision: Create new following same patterns
+```
+
+### Low Similarity (<70%)
+**Different Domain → CREATE NEW**
+
+```
+lulu_search(query: "blockchain integration")
+Results:
+  1. apiClient (0.45 similarity)
+  2. fetchData (0.38 similarity)
+
+Decision: Create new, no relevant existing code
+```
+
+---
+
+## 🚫 Anti-Patterns (Don't Do This!)
+
+### ❌ Creating Without Searching
+```
+User: "Create validation function"
+You: 
+  def validate_input(value):
+    return bool(value)
+
+WRONG! Should have searched first!
+Turns out validate_input already existed.
+```
+
+### ❌ Ignoring High-Similarity Results
+```
+lulu_search returns:
+  - validateEmail (0.94 similarity)
+
+You: "I'll create emailValidator instead"
+  def email_validator(email): ...
+
+WRONG! 94% match means use existing!
+```
+
+### ❌ Searching After Creating
+```
+You: *writes entire auth system*
+You: lulu_search("authentication")
+You: "Oh, AuthService already existed..."
+
+WRONG! Search BEFORE, not after!
+```
+
+### ❌ Using Vague Search Terms
+```
+You: lulu_search(query: "function")
+
+Returns: 500 generic results
+
+WRONG! Be specific: "email validation function"
+```
+
+### ❌ Not Reviewing All Results
+```
+lulu_search returns 8 results
+You: *only reads first one*
+You: *misses perfect match in result #3*
+
+WRONG! Review all results, especially top 5
+```
+
+---
+
+## ✅ Correct Search Workflow
+
+### Example: User Asks for Auth System
+
+```
+Step 1: Get context
+  lulu_get_context
+  → Learn project structure
+
+Step 2: Search broadly first
+  lulu_search(query: "authentication login user session")
+  
+  Results:
+    1. AuthService (0.89) ✅
+    2. AUTH_CONFIG (0.87) ✅
+    3. User model (0.82) ✅
+    4. loginHandler (0.91) ✅ PERFECT!
+
+Step 3: Search for specific patterns
+  lulu_search(query: "login validation credentials")
+  
+  Results:
+    1. validateCredentials (0.95) ✅ EXISTS!
+    2. CredentialsSchema (0.88) ✅
+    3. validateToken (0.86) ✅
+
+Step 4: Make decision
+  - loginHandler exists (0.91) → REUSE
+  - validateCredentials exists (0.95) → REUSE
+  - Auth models exist (0.82) → REUSE
+  
+  → Decision: Most auth code exists!
+  → Action: Compose existing pieces, add small extensions only
+
+Step 5: Generate minimal new code
+  - Import existing AuthService
+  - Import existing validators
+  - Maybe create AuthController if missing
+  - NO duplication!
+```
+
+---
+
+## 🎯 Search Decision Tree (MANDATORY PATH)
+
+```
+User requests code
+  ↓
+🚨 STEP 1: Did you call lulu_get_context? 
+  ❌ No → 🛑 STOP! Call it first (MANDATORY!)
+  ✅ Yes → Continue
+  ↓
+🚨 STEP 2: Call lulu_search with specific query (MANDATORY!)
+  → Use 3-6 descriptive words
+  → Get top 8 results minimum
+  ↓
+🚨 STEP 3: Review ALL results (MANDATORY!)
+  → Check similarity scores for EVERY result
+  → Document findings
+  ↓
+🚨 STEP 4: Decision Point (MANDATORY!)
+  ↓
+  ├─ Similarity ≥90%
+  │    → 🚨 MUST REUSE exactly (import and use as-is)
+  │    → NO CREATION ALLOWED!
+  │
+  ├─ Similarity 85-89%
+  │    → 🚨 MUST REUSE or adapt (no new code!)
+  │    → Ask user: "Found similar code at 87% match, reusing it"
+  │
+  ├─ Similarity 70-84%
+  │    → ✅ Use as reference pattern
+  │    → Create new following same conventions
+  │    → Still call lulu_get_guidance first!
+  │
+  └─ Similarity <70%
+       → ✅ Create new code
+       → Still call lulu_get_guidance first!
+       → Follow project structure from lulu-code-organization
+```
+
+**REMEMBER: Similarity ≥85% = NO NEW CODE! You MUST reuse existing code!**
+
+---
+
+## 💡 Advanced Search Patterns
+
+### Pattern 1: Layered Search
+```
+1. Search broadly: "authentication system"
+2. Search specific: "login credentials validator"
+3. Search models: "user authentication schema"
+4. Search config: "auth endpoints constants"
+
+Result: Complete picture of auth implementation
+```
+
+### Pattern 2: Feature Discovery
+```
+User: "Add payment processing"
+
+1. lulu_search("payment processing")
+   → Find existing payment code
+   
+2. lulu_search("payment webhook handler")
+   → Find integration points
+   
+3. lulu_search("payment validation")
+   → Find validation logic
+   
+Combine all to understand full payment flow
+```
+
+### Pattern 3: Refactoring Search
+```
+User: "Refactor validation logic"
+
+1. lulu_search("validation function")
+   → Find all validation functions
+   
+2. lulu_search("validation patterns")
+   → Find validation patterns
+   
+3. Analyze results for duplication
+4. Consolidate duplicates
+```
+
+---
+
+## 📊 Success Metrics
+
+**Good Session** (Lulu happy 🌸):
+- ✅ Searched before creating every function/module
+- ✅ Reused code with similarity ≥85%
+- ✅ No unnecessary duplication
+- ✅ Followed existing patterns
+
+**Bad Session** (Lulu sad 😢):
+- ❌ Created functions without searching
+- ❌ Ignored high-similarity matches
+- ❌ Duplicated existing utilities
+- ❌ Inconsistent with codebase patterns
+
+---
+
+## 🎓 Remember (MANDATORY PRINCIPLES)
+
+1. **🚨 SEARCH FIRST** - Before creating anything (NO EXCEPTIONS!)
+2. **🚨 BE SPECIFIC** - Use descriptive search queries (3-6 words minimum)
+3. **🚨 REVIEW ALL** - Check top 5-8 results minimum (don't skip any!)
+4. **🚨 REUSE ≥85%** - Don't recreate existing code (MANDATORY!)
+5. **✅ PATTERN ≥70%** - Follow existing patterns (use as reference)
+6. **✅ CREATE <70%** - Only when truly new (still use lulu_get_guidance!)
+
+### **The Golden Rules:**
+
+> **"If similarity ≥85%, you MUST reuse. No new code allowed."**
+
+> **"If you didn't search, you didn't do the task correctly."**
+
+> **"The best code is code you don't have to write!"** 🌸
+
+### **Enforcement:**
+
+- **Similarity ≥85%** = 🚨 **BLOCKED from creating new code** - MUST reuse!
+- **No search** = 🚨 **BLOCKED from creating code** - MUST search first!
+- **No review** = 🚨 **BLOCKED from creating code** - MUST review results!
+
+**No exceptions. No shortcuts. Use Lulu or don't code!** 🚨

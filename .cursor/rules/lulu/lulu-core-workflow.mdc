@@ -1,0 +1,529 @@
+---
+description: "🚨 LULU MANDATORY WORKFLOW - ALWAYS ENFORCED - YOU MUST FOLLOW EVERY STEP"
+alwaysApply: true
+---
+
+# 🚨 LULU MANDATORY WORKFLOW
+
+**THIS IS NOT OPTIONAL. THIS IS MANDATORY. YOU MUST FOLLOW EVERY STEP.**
+
+**Lulu provides accurate, context-aware code generation using your existing codebase. Following this workflow is REQUIRED for ALL operations.**
+
+---
+
+## 📢 **ALWAYS ENFORCED - READ THIS FIRST**
+
+⚠️ **THIS RULE FILE IS ALWAYS ACTIVE (`alwaysApply: true`)**
+
+This means:
+- ✅ You MUST follow this workflow for EVERY operation
+- ✅ This applies to ALL files, ALL directories, ALL operations
+- ✅ There are NO exceptions, NO shortcuts, NO "maybe later"
+- ✅ Every code operation is tracked and monitored
+- ✅ Your compliance rate is measured and reported
+
+**Workflow compliance target: 100%**
+
+**Current enforcement: MANDATORY - Violations will be flagged**
+
+---
+
+## 🚨🚨🚨 CRITICAL: YOU MUST USE LULU TOOLS 🚨🚨🚨
+
+### ⛔ **BLOCKING RULE: NO OPERATIONS WITHOUT LULU**
+
+**BEFORE doing ANYTHING (code, grep, curl, file operations, etc.), you MUST:**
+
+1. ✅ **Call `lulu_get_context`** - Get project structure (MANDATORY FIRST STEP)
+2. ✅ **Call `lulu_search`** - Find existing code/patterns (MANDATORY BEFORE ANY ACTION)
+3. ✅ **Review search results** - Check similarity scores (MANDATORY DECISION POINT)
+4. ✅ **Use Lulu tools** - For code generation, file location, imports, etc.
+5. ✅ **Call `lulu_assess`** - Quality check after generation (MANDATORY FINAL STEP)
+
+**IF YOU SKIP ANY OF THESE STEPS, YOU ARE VIOLATING THE WORKFLOW!**
+
+### 🛑 **THIS APPLIES TO EVERYTHING:**
+
+- ✅ **Code generation** → Must use Lulu first (context + search)
+- ✅ **grep/search commands** → Use `lulu_search` FIRST for context, then grep if needed
+- ✅ **curl/API calls** → Use `lulu_search` FIRST to find existing API clients/patterns
+- ✅ **File operations** → Use `lulu_get_guidance` FIRST for file locations
+- ✅ **Reading files** → Use `lulu_read_code` or `lulu_search` FIRST for context
+- ✅ **Terminal commands** → Use `lulu_search` FIRST to check existing scripts/patterns
+- ✅ **Any codebase operation** → Lulu tools FIRST for context/search, then proceed
+
+**Rule: Lulu tools provide context/search FIRST, then you can use grep/curl/etc. as supplementary tools if needed.**
+
+### 🛑 **PRE-FLIGHT CHECKLIST (MUST COMPLETE BEFORE ANY OPERATION)**
+
+Before you do ANYTHING (code, grep, curl, file ops, etc.), answer these questions:
+
+- [ ] **Did I call `lulu_get_context`?** → If NO: **STOP!** Call it NOW!
+- [ ] **Did I call `lulu_search` with a specific query?** → If NO: **STOP!** Search NOW!
+- [ ] **Did I review ALL search results?** → If NO: **STOP!** Review them NOW!
+- [ ] **Did I check similarity scores?** → If NO: **STOP!** Check them NOW!
+- [ ] **If similarity ≥85%, did I reuse existing code?** → If NO: **STOP!** Reuse it NOW!
+- [ ] **For file operations, did I use `lulu_get_guidance`?** → If NO: **STOP!** Get guidance NOW!
+- [ ] **For reading code, did I use `lulu_read_code` or `lulu_search`?** → If NO: **STOP!** Use Lulu tools NOW!
+
+**Only proceed AFTER all checks are complete!**
+
+### 📋 **Operation-Specific Rules:**
+
+#### **Before Using grep:**
+```
+❌ DON'T: grep -r "functionName" .  (without Lulu context first)
+✅ DO: 
+1. lulu_search(query: "functionName")  ← FIRST! Get context + results
+2. Review Lulu results (shows similarity, usage, patterns)
+3. If needed, use grep for exact text matching AFTER getting context
+→ Lulu provides context FIRST, grep is supplementary!
+```
+
+#### **Before Using curl:**
+```
+❌ DON'T: curl https://api.example.com/endpoint  (without checking existing patterns)
+✅ DO: 
+1. lulu_search(query: "api endpoint http request client")  ← FIRST! Find existing patterns
+2. Check if API client exists in codebase (≥85% similarity = reuse!)
+3. If no existing client found, THEN use curl with context from Lulu
+→ Lulu finds existing patterns FIRST, curl is supplementary!
+```
+
+#### **Before Reading Files:**
+```
+❌ DON'T: read_file("src/utils/helper.ts")  (without Lulu context first)
+✅ DO: 
+1. lulu_search(query: "helper utility functions")  ← FIRST! Get context
+2. OR lulu_read_code(name: "helper")  ← Finds by name with context!
+3. Then use read_file if you need exact file content
+→ Lulu provides context FIRST, read_file is supplementary!
+```
+
+#### **Before File Operations:**
+```
+❌ DON'T: Create file at "src/components/Button.tsx"  (without guidance)
+✅ DO:
+1. lulu_get_guidance(fileType: "component", name: "Button")  ← FIRST!
+2. Get exact path, naming, imports from Lulu
+3. Then create file following Lulu's guidance
+→ Lulu provides guidance FIRST, then create!
+```
+
+---
+
+## 🎯 MANDATORY 2-PHASE WORKFLOW
+
+### PHASE 1: Static Context (ALWAYS FIRST!)
+
+Before ANY code generation:
+```
+Tool: lulu_get_context
+Returns: Complete project inventory, conventions, structure
+Works: Offline (no API needed)
+```
+
+**What you get:**
+- All components, hooks, utils, types, constants
+- Naming conventions and patterns
+- File organization structure
+- Import paths and aliases
+- Framework and language info
+
+**Why first?** Provides foundation and big picture of the entire codebase.
+
+---
+
+### PHASE 2: Semantic Search (Find Specific Code)
+
+After getting context, search for relevant patterns:
+```
+Tool: lulu_search
+Parameters: { query: "natural language description", topK: 8 }
+Returns: Ranked results with similarity scores + source code
+Requires: Cloud API (docker-compose up -d)
+```
+
+**What you get:**
+- Relevant functions/components/modules ranked by similarity (0-1)
+- Source code snippets
+- Usage patterns and relationships
+- Import paths
+
+**Why second?** Precision. Finds EXACTLY what's relevant to your task.
+
+---
+
+## 📚 ALL LULU TOOLS
+
+### Context Tools (Offline)
+- `lulu_get_context` - **USE FIRST!** Complete static context from .lulu/profile.json
+- `lulu_list` - List specific category (components, hooks, utils, types, constants, api, stores)
+- `lulu_read_code` - Get source code of specific file by name
+
+### Search Tools (Cloud Required)
+- `lulu_search` - Natural language semantic search across codebase
+- `lulu_find_duplicates` - Check if similar code already exists before creating new
+
+### Generation & Guidance Tools
+- `lulu_get_guidance` - Get file creation guidance (where to create, naming conventions)
+- `lulu_generate_code` - Generate code following learned patterns
+- `lulu_assess` - **MANDATORY after generation** - Quality check (must score ≥80%)
+
+### Intelligence Tools
+- `lulu_learn` - Record corrections to improve future generations
+- `lulu_stats` - Show time saved, costs, accuracy metrics
+- `lulu_discover_mcps` - Find relevant MCP servers for your tech stack
+
+---
+
+## ✅ DECISION MATRIX
+
+When `lulu_search` returns results, use this guide:
+
+| Similarity Score | Action | Example |
+|-----|-----|---|
+| **≥90%** | REUSE exactly | Import and use as-is |
+| **85-89%** | REUSE or adapt | Use with minor tweaks |
+| **70-84%** | Use as reference | Follow patterns, create new |
+| **<70%** | Create new | Follow project conventions |
+
+**CRITICAL**: Similarity ≥85% = REUSE! Don't duplicate existing code.
+
+---
+
+## 🎯 EVERY TASK CHECKLIST (MANDATORY - VERIFY BEFORE COMPLETING)
+
+**You MUST complete ALL of these before marking any task as done:**
+
+### Phase 1: Context Gathering (MANDATORY - DO FIRST!)
+- [ ] ✅ Called `lulu_get_context` FIRST to understand project structure
+- [ ] ✅ Called `lulu_search` with specific query to find relevant existing code
+- [ ] ✅ Reviewed ALL search results (top 5-8 minimum)
+- [ ] ✅ Checked similarity scores for each result
+- [ ] ✅ Documented which results have similarity ≥85% (must reuse!)
+
+### Phase 2: Code Generation (ONLY AFTER PHASE 1!)
+- [ ] ✅ REUSED existing code when similarity ≥85% (no exceptions!)
+- [ ] ✅ Used `lulu_get_guidance` for file location and naming
+- [ ] ✅ Followed project structure from lulu-code-organization rule
+- [ ] ✅ Used existing patterns from search results when similarity ≥70%
+
+### Phase 3: Quality Assurance (MANDATORY - DO LAST!)
+- [ ] ✅ Called `lulu_assess` after generation (MUST DO!)
+- [ ] ✅ Quality score ≥80% (if <80%, fix and reassess - NO EXCEPTIONS!)
+- [ ] ✅ No unnecessary code duplication
+- [ ] ✅ All imports follow project patterns
+
+**If ANY checkbox is unchecked, the task is NOT complete!**
+
+---
+
+## 🚫 COMMON MISTAKES (THESE WILL CAUSE FAILURE!)
+
+### ❌ Skipping Static Context (BLOCKED!)
+```
+User: "Create validation function"
+You: *immediately creates function*
+
+🚨 BLOCKED! You MUST call lulu_get_context first!
+Action: STOP immediately, call lulu_get_context, then proceed.
+```
+
+### ❌ Ignoring Search Results (BLOCKED!)
+```
+lulu_search returns: validateInput (0.94 similarity)
+You: *creates new inputValidator function*
+
+🚨 BLOCKED! 94% similarity = MUST REUSE!
+Action: STOP immediately, import and use validateInput instead.
+```
+
+### ❌ Creating Before Searching (BLOCKED!)
+```
+You: *writes code first*
+You: lulu_search("validation") *searches after*
+
+🚨 BLOCKED! Search MUST happen BEFORE code generation!
+Action: DELETE the code you wrote, search first, then regenerate.
+```
+
+### ❌ Skipping Quality Check (BLOCKED!)
+```
+You: *generates code*
+You: *moves to next task*
+
+🚨 BLOCKED! lulu_assess is MANDATORY!
+Action: STOP, call lulu_assess, fix if <80%, then continue.
+```
+
+### ❌ Not Checking Similarity Scores (BLOCKED!)
+```
+lulu_search returns: 8 results
+You: *only reads first result, ignores others*
+
+🚨 BLOCKED! You MUST review ALL results, especially top 5!
+Action: Review all results, check similarity scores, reuse if ≥85%.
+```
+
+### ❌ Creating Code Without lulu_get_guidance (BLOCKED!)
+```
+User: "Create UserService"
+You: *creates file without checking where it should go*
+
+🚨 BLOCKED! You MUST use lulu_get_guidance for file location!
+Action: Call lulu_get_guidance("service", "UserService") first.
+```
+
+### ❌ Using grep Without lulu_search First (BLOCKED!)
+```
+User: "Find where validateEmail is used"
+You: *runs grep -r "validateEmail" .*  (without Lulu context)
+
+🚨 BLOCKED! You MUST use lulu_search FIRST for context!
+Action: 
+1. Call lulu_search(query: "validateEmail usage") FIRST
+2. Review results for context, similarity scores, usage patterns
+3. THEN use grep if you need exact text matching
+→ Lulu provides context FIRST, grep is supplementary!
+```
+
+### ❌ Using curl Without Checking Existing Patterns First (BLOCKED!)
+```
+User: "Call the API endpoint"
+You: *runs curl command directly*  (without checking existing patterns)
+
+🚨 BLOCKED! Check existing patterns FIRST with lulu_search!
+Action: 
+1. Call lulu_search(query: "api client http request") FIRST
+2. Check if API client exists (≥85% similarity = reuse!)
+3. THEN use curl if no existing client found
+→ Lulu finds patterns FIRST, curl is supplementary!
+```
+
+### ❌ Reading Files Without lulu Context First (BLOCKED!)
+```
+User: "Show me the UserService code"
+You: *reads file directly with read_file*  (without Lulu context)
+
+🚨 BLOCKED! Use Lulu tools FIRST for context!
+Action: 
+1. Call lulu_read_code(name: "UserService") OR lulu_search(query: "UserService") FIRST
+2. Get context, usage patterns, relationships
+3. THEN use read_file if you need exact file content
+→ Lulu provides context FIRST, read_file is supplementary!
+```
+
+---
+
+## ✅ CORRECT WORKFLOW (FOLLOW EXACTLY - NO SHORTCUTS!)
+
+```
+STEP 1: User requests feature/code
+  ↓
+STEP 2: 🚨 MANDATORY - Call lulu_get_context
+  → Understand project structure
+  → Get naming conventions
+  → Get folder structure
+  → Get import patterns
+  ↓
+STEP 3: 🚨 MANDATORY - Call lulu_search(query)
+  → Use specific, descriptive query (3-6 words)
+  → Get top 8 results minimum
+  ↓
+STEP 4: 🚨 MANDATORY - Review ALL results
+  → Check similarity scores for EVERY result
+  → Document which ones are ≥85% (must reuse!)
+  → Document which ones are 70-84% (use as reference)
+  ↓
+STEP 5: 🚨 MANDATORY - Decision Point
+  → ≥85% similarity? → REUSE (import and use as-is)
+  → 70-84% similarity? → Use as reference pattern
+  → <70% similarity? → Create new following conventions
+  ↓
+STEP 6: 🚨 MANDATORY - Get guidance before creating
+  → Call lulu_get_guidance(fileType, name)
+  → Get exact file path
+  → Get naming conventions
+  → Get import patterns
+  ↓
+STEP 7: Generate code
+  → Follow project conventions from lulu_get_context
+  → Reuse existing code if similarity ≥85%
+  → Follow patterns from search results if similarity ≥70%
+  ↓
+STEP 8: 🚨 MANDATORY - Call lulu_assess
+  → Verify quality score ≥80%
+  → If <80%: Fix issues and reassess
+  → NO EXCEPTIONS - quality must be ≥80%!
+  ↓
+STEP 9: Done ✅
+```
+
+### **For grep/search operations:**
+```
+STEP 1: User asks to find/search code
+  ↓
+STEP 2: 🚨 MANDATORY - Call lulu_search(query) FIRST!
+  → Get context, similarity scores, usage patterns
+  → Find related code, not just exact matches
+  → Understand relationships and patterns
+  ↓
+STEP 3: Review Lulu results
+  → Check similarity scores
+  → Review context and usage patterns
+  → Document findings
+  ↓
+STEP 4: If needed, use grep for exact text matching
+  → Only AFTER getting context from Lulu
+  → Use grep to find exact occurrences
+  → Combine Lulu context + grep results
+```
+
+### **For file operations (read/create/move):**
+```
+STEP 1: User asks to read/create/move files
+  ↓
+STEP 2: 🚨 MANDATORY - Use Lulu tools FIRST!
+  → For creating: Call lulu_get_guidance(fileType, name)
+  → For reading: Call lulu_read_code(name) OR lulu_search(query: "filename")
+  → Get context, location, naming, imports
+  ↓
+STEP 3: Review Lulu results
+  → Get file location and naming conventions
+  → Understand relationships and usage
+  → Check for existing similar files
+  ↓
+STEP 4: Then use file operations
+  → Use read_file AFTER getting context from Lulu
+  → Create files following Lulu's guidance
+  → Follow patterns from Lulu search results
+```
+
+### **For API/curl operations:**
+```
+STEP 1: User asks to call API/make HTTP request
+  ↓
+STEP 2: 🚨 MANDATORY - Call lulu_search(query: "api client http request") FIRST!
+  → Find existing API clients/patterns
+  → Check similarity scores
+  → Reuse if ≥85% similarity
+  ↓
+STEP 3: Review results
+  → If existing client found (≥85%): REUSE it!
+  → If patterns found (70-84%): Follow patterns
+  → Document what you found
+  ↓
+STEP 4: Only if no existing client found, use curl
+  → Use curl AFTER getting context from Lulu
+  → Follow patterns from Lulu search results
+  → Use context to build proper request
+```
+
+### **For terminal commands:**
+```
+STEP 1: User asks to run terminal command
+  ↓
+STEP 2: 🚨 MANDATORY - Check Lulu context first!
+  → lulu_search(query: "script command terminal")
+  → Check if similar scripts exist
+  → Check project conventions for commands
+  ↓
+STEP 3: Use existing scripts/patterns if found (≥85% similarity)
+```
+
+**REMEMBER: Steps 2, 3, 4, 5, 6, and 8 are MANDATORY - skipping any of them is a violation!**
+
+**FOR ALL OPERATIONS: Use Lulu tools FIRST, then proceed!**
+
+---
+
+## 🌐 Cloud API Setup
+
+Lulu semantic search requires the Python API:
+
+```bash
+# Start services
+docker-compose up -d
+
+# Verify health
+curl http://localhost:8000/health
+
+# Upload scan data
+lulu upload
+```
+
+**If API unavailable:**
+- Static context (`lulu_get_context`) still works offline
+- Semantic search will show clear error with setup instructions
+- You can still generate code using static context + code organization rules
+
+---
+
+---
+
+## 🔒 MANDATORY ENFORCEMENT - NO EXCEPTIONS
+
+### ⚠️ **CRITICAL: THIS WORKFLOW IS MANDATORY**
+
+**YOU MUST FOLLOW EVERY STEP. THIS IS NOT A SUGGESTION. THIS IS A REQUIREMENT.**
+
+### **Consequences of Skipping Steps:**
+
+1. **Skipping `lulu_get_context`**: 
+   - ❌ You don't know project structure
+   - ❌ You don't know naming conventions
+   - ❌ You create code that doesn't fit
+   - **Result: TASK INCOMPLETE - Code will be rejected**
+   - **Action: STOP and call `lulu_get_context` immediately**
+
+2. **Skipping `lulu_search`**:
+   - ❌ You duplicate existing code
+   - ❌ You miss better patterns
+   - ❌ You create inconsistencies
+   - **Result: TASK INCOMPLETE - Code duplication violation**
+   - **Action: STOP, DELETE your code, search first, then regenerate**
+
+3. **Skipping `lulu_assess`**:
+   - ❌ You don't know if code follows conventions
+   - ❌ You don't know quality score
+   - ❌ You ship low-quality code
+   - **Result: TASK INCOMPLETE - Quality not verified**
+   - **Action: STOP and call `lulu_assess` immediately**
+
+### **The Golden Rules (MEMORIZE THESE):**
+
+> **"If you didn't use Lulu tools, you didn't do the task correctly."**
+
+> **"Search FIRST, create SECOND. Never create before searching."**
+
+> **"Context ALWAYS comes first. No context = No code."**
+
+> **"Quality check is MANDATORY. No assess = Not done."**
+
+**Every code generation task REQUIRES (NO EXCEPTIONS):**
+1. ✅ `lulu_get_context` (ALWAYS FIRST)
+2. ✅ `lulu_search` (BEFORE creating)
+3. ✅ `lulu_get_guidance` (BEFORE file operations)
+4. ✅ Generate/modify code
+5. ✅ `lulu_assess` (ALWAYS LAST)
+
+**Skipping ANY step = INCOMPLETE TASK = MUST REDO**
+
+### 🚨 **REMINDER ON EVERY OPERATION:**
+
+Before you do ANYTHING, ask yourself:
+- ❓ "Did I call lulu_get_context?"
+- ❓ "Did I search for existing code?"
+- ❓ "Did I get file guidance?"
+- ❓ "Will I assess the quality?"
+
+**If ANY answer is NO, STOP IMMEDIATELY and complete the missing step!**
+
+---
+
+**Remember: Lulu helps you write better code by finding what already exists!** 🌸
+
+**Key principle: SEARCH FIRST, CREATE SECOND**
+
+**Enforcement: USE LULU OR DON'T CODE!** 🚨

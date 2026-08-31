@@ -1,0 +1,20 @@
+{
+  "start_time": "2026-02-05T15:38:25Z",
+  "turn_count": 0,
+  "tool_counts": {
+    "MCP:lulu_get_context": 1,
+    "MCP:lulu_search": 3,
+    "Read": 36,
+    "List": 4,
+    "Write": 12,
+    "MCP:lulu_assess": 1,
+    "Shell": 12
+  },
+  "tool_time_ms": 57392.116,
+  "errors": [],
+  "lulu_tools": 0,
+  "manual_tools": 69,
+  "total_tokens_est": 0,
+  "scores": [],
+  "aha_moments": 0
+}

@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "lulu": {
+      "command": "/Users/theking/.nvm/versions/node/v22.0.0/bin/node",
+      "args": [
+        "/Users/theking/Desktop/Lulu/packages/mcp-server/dist/server.js"
+      ],
+      "env": {
+        "PROJECT_PATH": "/Users/theking/Desktop/testing-projects/full-stack-fastapi-template",
+        "LULU_PROJECT_PATH": "/Users/theking/Desktop/testing-projects/full-stack-fastapi-template"
+      }
+    }
+  }
+}

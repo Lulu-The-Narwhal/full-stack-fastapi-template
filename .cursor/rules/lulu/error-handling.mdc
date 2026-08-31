@@ -1,0 +1,54 @@
+---
+description: "Error handling patterns - try/except patterns, custom exceptions"
+globs:
+  - "**/*.py"
+alwaysApply: false
+---
+
+# ⚠️ Error Handling Patterns
+
+## Custom Error Classes
+
+**Detected**: 2 custom error/exception classes
+
+**Examples**:
+- `CancelError` (see `frontend/src/client/core/CancelablePromise.ts`)
+- `ApiError` (see `frontend/src/client/core/ApiError.ts`)
+
+## Error Handling Style
+
+**Pattern**: `try/except` blocks with specific exception types
+
+**Example from your codebase**:
+
+**Function**: `init`  
+**File**: `backend/app/backend_pre_start.py`
+
+```python
+def init(db_engine: Engine) -> None:
+    """Function description."""
+    try:
+        # Operation that might fail
+        result = some_operation()
+        return result
+    except SpecificError as e:
+        # Handle specific error
+        logger.error(f"Error: {e}")
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        # Handle general error
+        logger.error(f"Unexpected error: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+```
+
+## Best Practices
+
+1. **Use specific exception types** - Catch specific errors first, then general
+2. **Log errors** - Always log errors with context
+3. **Return meaningful errors** - Provide clear error messages
+4. **Use HTTP status codes** - For API endpoints, use appropriate status codes
+5. **Use custom exceptions** - Leverage your custom error classes
+
+---
+
+**Follow these error handling patterns when writing new code.**

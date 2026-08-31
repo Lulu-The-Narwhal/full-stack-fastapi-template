@@ -1,7 +1,9 @@
 import uuid
+import shutil
+import os
 from typing import Any
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, File, UploadFile
 from sqlmodel import col, delete, func, select
 
 from app import crud
@@ -93,6 +95,36 @@ def update_user_me(
             )
     user_data = user_in.model_dump(exclude_unset=True)
     current_user.sqlmodel_update(user_data)
+    session.add(current_user)
+    session.commit()
+    session.refresh(current_user)
+    return current_user
+
+
+@router.post("/me/avatar", response_model=UserPublic)
+def upload_user_avatar(
+    *,
+    session: SessionDep,
+    current_user: CurrentUser,
+    file: UploadFile = File(...)
+) -> Any:
+    """
+    Upload user avatar.
+    """
+    upload_dir = "app/static/uploads"
+    if not os.path.exists(upload_dir):
+        os.makedirs(upload_dir)
+    
+    file_ext = file.filename.split(".")[-1] if "." in file.filename else "png"
+    filename = f"{current_user.id}.{file_ext}"
+    file_path = os.path.join(upload_dir, filename)
+    
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+        
+    avatar_url = f"/static/uploads/{filename}"
+    
+    current_user.avatar_url = avatar_url
     session.add(current_user)
     session.commit()
     session.refresh(current_user)
